@@ -21,6 +21,12 @@ class GameComponent(val canvas: HTMLCanvasElement, val blockSize: Int = 16) {
 
   canvas.onclick = onClick _
 
+  def random(): Unit = {
+    field = Some(GameField.random(builder.size, builder.size))
+    builder.fields = field.get.field
+    update()
+  }
+
   def onClick(event: MouseEvent):Unit = {
     stop()
     val rect = canvas.getBoundingClientRect()
@@ -35,8 +41,6 @@ class GameComponent(val canvas: HTMLCanvasElement, val blockSize: Int = 16) {
   }
 
   private def update(): Unit = {
-    canvas.width = blockSize * builder.size
-    canvas.height = blockSize * builder.size
     draw()
   }
 
