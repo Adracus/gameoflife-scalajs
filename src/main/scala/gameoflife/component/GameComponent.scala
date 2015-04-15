@@ -28,8 +28,9 @@ class GameComponent(val canvas: HTMLCanvasElement, val blockSize: Int = 16) {
     draw()
   }
 
-  def size_= (size: Int):Unit = {
+  def setSize(size: Int):Unit = {
     builder.size = size
+    field = Some(builder.build)
     update()
   }
 

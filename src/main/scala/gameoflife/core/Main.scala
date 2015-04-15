@@ -29,7 +29,7 @@ object Main extends JSApp {
         document.querySelector("#update").asInstanceOf[HTMLButtonElement].onclick =
           (_: Any) => {
             val value = document.querySelector("#size").asInstanceOf[HTMLInputElement].value.toInt
-            game.size_=(value)
+            game.setSize(value)
           }
       }
     }
