@@ -11,14 +11,16 @@ class Renderer(private val canvas: HTMLCanvasElement) {
 
   def draw(gameField: GameField): Unit = {
     val ratio = getRatio(gameField)
-    fill(Color.White)
+    val cellWidth = ratio._1.toInt
+    val cellHeight = ratio._2.toInt
+    clear(Color.White)
     for (x <- 0 until gameField.width; y <- 0 until gameField.height) {
       val color = if (gameField(x, y)) Color.Red else Color.White
-      fillRectangle((x * ratio._1).toInt, (y * ratio._2).toInt, (ratio._1).toInt, (ratio._2).toInt, color)
+      fillRectangle(x * cellWidth, y * cellHeight, cellWidth, cellHeight, color)
     }
   }
 
-  private def fill(color: Color = Color.White): Unit = {
+  private def clear(color: Color = Color.White): Unit = {
     fillRectangle(0, 0, width, height, color)
   }
 
