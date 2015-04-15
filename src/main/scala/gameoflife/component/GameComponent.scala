@@ -22,6 +22,7 @@ class GameComponent(val canvas: HTMLCanvasElement, val blockSize: Int = 16) {
   canvas.onclick = onClick _
 
   def random(): Unit = {
+    stop()
     field = Some(GameField.random(builder.size, builder.size))
     builder.fields = field.get.field
     update()
