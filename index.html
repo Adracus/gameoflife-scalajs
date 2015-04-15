@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="./target/scala-2.11/gameoflife-fastopt.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Conway's Game of Life</h1>
+        <h3>In ScalaJS</h3>
+
+        <p>The <b>Game of Life</b>, also known simply as Life, is a cellular
+        automaton devised by the British mathematician John Horton Conway in 1970.
+        The "game" is a zero-player game, meaning that its evolution is
+        determined by its initial state, requiring no further input. One interacts
+        with the Game of Life by creating an initial configuration and observing
+        how it evolves or, for advanced players, by creating patterns with
+        particular properties.</p>
+
+        <div class="col-md-12" style="text-align: center;">
+            <canvas id="canvas" width="500" height="500" style="border: 1px solid black; margin: 10px;"></canvas>
+        </div>
+
+        <div class="col-md-4">
+            <button class="btn btn-primary" id="toggle">Start</button>
+            <button class="btn btn-danger" id="clear">Clear</button>
+            <button class="btn btn-default" id="random">Random</button>
+            <div class="form-group">
+                <label for="size">Gamefield Size</label>
+                <input class="form-control" id="size" type="number" placeholder="size">
+            </div>
+            <button class="btn btn-default" id="update">Update</button>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        gameoflife.core.Main().main();
+    </script>
+</body>
+</html>
