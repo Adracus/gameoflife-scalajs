@@ -20,7 +20,7 @@ object GameField {
 /**
  * Created by axel on 13/04/15.
  */
-class GameField(private val field: Array[Array[Boolean]],
+class GameField(val field: Array[Array[Boolean]],
                 private val ruleEngine: RuleEngine = new DefaultRuleEngine()) {
   def width = field.length
 

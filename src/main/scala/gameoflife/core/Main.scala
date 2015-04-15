@@ -1,8 +1,9 @@
 package gameoflife.core
 
+import gameoflife.component.GameComponent
 import gameoflife.gamefield.GameField
 import gameoflife.graphics.Renderer
-import org.scalajs.dom.raw.HTMLCanvasElement
+import org.scalajs.dom.raw.{Event, HTMLInputElement, HTMLButtonElement, HTMLCanvasElement}
 
 import scala.scalajs.js.JSApp
 import org.scalajs.dom
@@ -14,18 +15,23 @@ import dom.document
 object Main extends JSApp {
   def main(): Unit = {
     val canvas = document.querySelector("#canvas").asInstanceOf[HTMLCanvasElement]
-    val renderer = new Renderer(canvas)
 
-    var field = GameField.random(34, 34)
-    renderer.draw(field)
-    val id = dom.setInterval(() => {
-      println("Loop")
-      if (field.hasNext) {
-        field = field.next()
-        renderer.draw(field)
-      } else {
-        println("Everything Dead")
+    val game = new GameComponent(canvas)
+
+    document.onreadystatechange = (event: Event) => {
+      if (document.readyState == "complete") {
+        document.querySelector("#start").asInstanceOf[HTMLButtonElement].onclick =
+          (_: Any) => game.start()
+
+        document.querySelector("#clear").asInstanceOf[HTMLButtonElement].onclick =
+          (_: Any) => game.clear()
+
+        document.querySelector("#update").asInstanceOf[HTMLButtonElement].onclick =
+          (_: Any) => {
+            val value = document.querySelector("#size").asInstanceOf[HTMLInputElement].value.toInt
+            game.size_=(value)
+          }
       }
-    }, 1000)
+    }
   }
 }

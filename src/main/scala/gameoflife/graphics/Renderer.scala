@@ -9,13 +9,13 @@ import org.scalajs.dom.raw.{CanvasRenderingContext2D, HTMLCanvasElement}
 class Renderer(private val canvas: HTMLCanvasElement) {
   val ctx = canvas.getContext("2d").asInstanceOf[CanvasRenderingContext2D]
 
-  def draw(gameField: GameField): Unit = {
-    val ratio = getRatio(gameField)
+  def draw(fields: Array[Array[Boolean]]): Unit = {
+    val ratio = getRatio(fields)
     val cellWidth = ratio._1.toInt
     val cellHeight = ratio._2.toInt
     clear(Color.White)
-    for (x <- 0 until gameField.width; y <- 0 until gameField.height) {
-      val color = if (gameField(x, y)) Color.Red else Color.White
+    for (x <- 0 until fields.length; y <- 0 until fields(0).length) {
+      val color = if (fields(x)(y)) Color.Red else Color.White
       fillRectangle(x * cellWidth, y * cellHeight, cellWidth, cellHeight, color)
     }
   }
@@ -33,8 +33,7 @@ class Renderer(private val canvas: HTMLCanvasElement) {
 
   private def width = canvas.width
   private def height = canvas.height
-  private def dim = (width, height)
-  private def getXRatio(gameField: GameField) = width.toDouble / gameField.width
-  private def getYRatio(gameField: GameField) = height.toDouble / gameField.height
-  private def getRatio(gameField: GameField) = (getXRatio(gameField), getYRatio(gameField))
+  private def getXRatio(fields: Array[Array[Boolean]]) = width.toDouble / fields.length
+  private def getYRatio(fields: Array[Array[Boolean]]) = height.toDouble / fields(0).length
+  private def getRatio(fields: Array[Array[Boolean]]) = (getXRatio(fields), getYRatio(fields))
 }
